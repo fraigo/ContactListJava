@@ -11,6 +11,8 @@ public class Main {
 	public static final String REMOVE="2";
 	public static final String SEARCH="3";
 	public static final String LIST="4";
+	public static final String UPDATE="5";
+	public static final String EXIT="0";
 
 	static ContactList list;
 
@@ -36,6 +38,21 @@ public class Main {
 				String word=scanner.nextLine();
 				ContactList tmp=list.search(word);
 				tmp.list();
+			}
+			if (option.equals(UPDATE)){
+				System.out.print("Find a contact by name or last name to update: ");
+				String word=scanner.nextLine();
+				ContactList tmp=list.search(word);
+				tmp.list();
+				System.out.println("Number of the contact to edit: ");
+				String pos;
+				pos=scanner.nextLine();
+				int position=Integer.parseInt(pos);
+				if (position-1>=list.length() || position<1){
+					System.out.println("Invalid position "+position);
+				}else{
+					list.getContact(position-1).fill(scanner);
+				}
 			}
 			if (option.equals(REMOVE)){
 				System.out.print("Find a contact by name or last name to remove: ");

@@ -38,16 +38,28 @@ public class Contact {
 	}
 	
 	public void fill(Scanner scanner){
-		System.out.println("*** Create a new Contact ***");
+		String action="Create";
+		if (this.getFirstName()!=null){
+			action="Update";
+		}
+		System.out.println("*** "+action+" Contact ***");
 		System.out.println("============================");
-		System.out.print("First Name:");
-		setFirstName(scanner.nextLine());
-		System.out.print("Last Name:");
-		setLastName(scanner.nextLine());
-		System.out.print("Phone Number:");
-		setPhoneNumber(scanner.nextLine());
-		System.out.print("Email Address:");
-		setEmailAddress(scanner.nextLine());
+		do{
+			System.out.print("First Name:");
+			setFirstName(scanner.nextLine());
+		}while(getFirstName()==null);
+		do{
+			System.out.print("Last Name:");
+			setLastName(scanner.nextLine());
+		}while(getLastName()==null);
+		do{
+			System.out.print("Phone Number:");
+			setPhoneNumber(scanner.nextLine());			
+		}while(getPhoneNumber()==null);
+		do{
+			System.out.print("Email Address:");
+			setEmailAddress(scanner.nextLine());			
+		}while(getEmailAddress()==null);
 	}
 
 	public String getFirstName() {
@@ -74,7 +86,7 @@ public class Contact {
 		if (phoneNumber.matches("\\(?\\d{3}\\)?[\\s.-]?\\d{3}?[\\s.-]?\\d{4}")){
 			this.phoneNumber = phoneNumber;			
 		}else{
-			System.err.println("Invalid phone number");
+			System.out.println("Error: Invalid phone number");
 		}
 	}
 
@@ -83,7 +95,11 @@ public class Contact {
 	}
 
 	public void setEmailAddress(String emailAddress) {
-		this.emailAddress = emailAddress;
+		if (emailAddress.matches("[A-Za-z0-9.]+@[A-Za-z0-9.]+\\.[A-Za-z0-9.]+")){
+			this.emailAddress = emailAddress;			
+		}else{
+			System.out.println("Error: Invalid Email address");
+		}
 	}
 	
 	
